@@ -13,20 +13,13 @@ O aplicativo foi criado para facilitar a importação de arquivos de pedido, val
   - Runtime do .NET (incluído na versão "Self-Contained", caso contrário, instale o [runtime .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)).
   - Microsoft Edge WebView2 Runtime (instale via [link oficial](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) se não estiver embutido).
 
-## Instalação
-
-1. Baixe o arquivo compactado (`publish.zip`) na seção de [Releases](https://github.com/seu-usuario/seu-repositorio/releases) deste repositório.
-2. Extraia o conteúdo do arquivo `.zip` para uma pasta de sua escolha.
-3. Execute o arquivo `Leitura_Arquivos_Pedido.exe` localizado na pasta extraída.
-4. (Opcional) Se solicitado, instale o runtime do WebView2 seguindo o link acima.
-
 ## Uso
 
 1. **Selecionar Arquivo**:
    - Clique em "Selecionar Arquivo" e escolha um arquivo no formato `PED_.TXT`.
    - O arquivo deve conter linhas no formato, por exemplo:
-     - `01;CNPJ`
-     - `02;EAN;QUANTIDADE`
+     - Cabeçalho: `01;CNPJ`
+     - Corpo(Itens podem se repetir, cabeçalho não): `02;EAN;QUANTIDADE`
    - O nome do arquivo selecionado será exibido na interface.
 
 2. **Executar Processamento**:
@@ -46,19 +39,3 @@ O aplicativo foi criado para facilitar a importação de arquivos de pedido, val
 - `Leitura_Arquivos_Pedido.exe`: Arquivo executável principal.
 - `wwwroot/`: Pasta contendo os arquivos HTML, JS e JSON usados pela WebView2 (ex.: `pedidos.json`).
 - `pedidos.db`: Banco de dados SQLite (será criado automaticamente se não existir).
-
-## Contribuições
-
-Sinta-se à vontade para abrir issues ou pull requests neste repositório para sugestões, correções ou melhorias. Contribuições são bem-vindas!
-
-## Licença
-
-[Especifique a licença, ex.: MIT, GPL, ou "Sem licença explícita" se não aplicável.] Este projeto pode ser usado livremente, mas qualquer uso comercial ou distribuição deve seguir os termos da licença escolhida.
-
-## Contato
-
-Para dúvidas ou suporte, entre em contato pelo [seu e-mail ou link] ou abra uma issue neste repositório.
-
----
-
-*Última atualização: 23 de julho de 2025, 22:03 (-03)*
