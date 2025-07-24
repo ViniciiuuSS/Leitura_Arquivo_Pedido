@@ -1,3 +1,4 @@
+Projeto em desenvolvimento...
 # Leitura de Arquivos de Pedido 📂
 
 Este é um aplicativo desktop desenvolvido em C# que permite a leitura e processamento de arquivos de pedido no formato `PED_.TXT`. O programa utiliza SQLite para armazenar os dados e WebView2 para exibir uma interface web integrada com informações dos pedidos. 🚀
