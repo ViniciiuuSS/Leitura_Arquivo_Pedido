@@ -1,0 +1,6 @@
+@API_Leitura_Arquivo_HostAddress = http://localhost:5122
+
+GET {{API_Leitura_Arquivo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

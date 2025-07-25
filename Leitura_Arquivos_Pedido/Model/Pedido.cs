@@ -3,7 +3,7 @@
     public class Pedido
     {
         public int PedCod { get; set; }
-        public int CliCod { get; set; }
+        public string CNPJ { get; set; }
         public string DataPedido { get; set; }
 
         public Cliente Cliente { get; set; }

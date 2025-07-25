@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36203.30 d17.14
+VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leitura_Arquivos_Pedido", "Leitura_Arquivos_Pedido\Leitura_Arquivos_Pedido.csproj", "{AA5F9203-FBFB-4441-88BE-F8F5C1348AF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Leitura_Arquivo", "API_Leitura_Arquivo\API_Leitura_Arquivo.csproj", "{8BFCBE36-10BA-4F45-BA37-F4E1C06EFB06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AA5F9203-FBFB-4441-88BE-F8F5C1348AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA5F9203-FBFB-4441-88BE-F8F5C1348AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA5F9203-FBFB-4441-88BE-F8F5C1348AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFCBE36-10BA-4F45-BA37-F4E1C06EFB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFCBE36-10BA-4F45-BA37-F4E1C06EFB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFCBE36-10BA-4F45-BA37-F4E1C06EFB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFCBE36-10BA-4F45-BA37-F4E1C06EFB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

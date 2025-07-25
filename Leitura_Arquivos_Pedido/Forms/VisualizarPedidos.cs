@@ -23,16 +23,50 @@ public class VisualizarPedidos : Form
 
     private async Task InicializarWebView()
     {
-        await navegador.EnsureCoreWebView2Async();
+        try
+        {
+            // Inicializa o WebView2
+            await navegador.EnsureCoreWebView2Async(null);
 
-        string outputPath = AppDomain.CurrentDomain.BaseDirectory;
-        string htmlPath = Path.Combine(outputPath, "wwwroot", "ListaPedidos.html");
+            string outputPath = AppDomain.CurrentDomain.BaseDirectory;
+            string wwwrootPath = Path.Combine(outputPath, "wwwroot");
 
-        navegador.CoreWebView2.SetVirtualHostNameToFolderMapping(
-            "app.local",
-            Path.Combine(outputPath, "wwwroot"),
-            CoreWebView2HostResourceAccessKind.Allow);
+            // Validação da pasta wwwroot
+            if (!Directory.Exists(wwwrootPath))
+            {
+                System.Windows.Forms.MessageBox.Show($"Pasta {wwwrootPath} não encontrada.");
+                return;
+            }
 
-        navegador.Source = new Uri(htmlPath);
+            // Configura o mapeamento virtual
+            navegador.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                "app.local",
+                wwwrootPath,
+                CoreWebView2HostResourceAccessKind.Allow);
+
+            // Validação do arquivo HTML
+            string htmlPath = Path.Combine(wwwrootPath, "ListaPedidos.html");
+            if (!File.Exists(htmlPath))
+            {
+                System.Windows.Forms.MessageBox.Show($"Arquivo {htmlPath} não encontrado.");
+                return;
+            }
+
+            // Define a fonte como URL virtual
+            navegador.Source = new Uri($"http://app.local/ListaPedidos.html");
+
+            // Adiciona um listener para capturar erros de navegação (opcional)
+            navegador.NavigationCompleted += (sender, e) =>
+            {
+                if (!e.IsSuccess)
+                {
+                    System.Windows.Forms.MessageBox.Show($"Falha na navegação: {e.WebErrorStatus}");
+                }
+            };
+        }
+        catch (Exception ex)
+        {
+            System.Windows.Forms.MessageBox.Show($"Erro ao inicializar WebView2: {ex.Message}");
+        }
     }
 }

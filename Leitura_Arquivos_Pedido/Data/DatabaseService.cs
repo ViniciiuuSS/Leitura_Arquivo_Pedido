@@ -146,7 +146,7 @@ namespace Leitura_Arquivos_Pedido.Data
 
             var pedidos = new List<Pedido>();
 
-            string selectQuery = @"SELECT PedCod, CliCod, DataPedido FROM Pedido";
+            string selectQuery = @"SELECT PedCod, CNPJ, DataPedido FROM Pedido PED INNER JOIN Cliente CLI ON CLI.CliCod = PED.CliCod";
             using var command = new SQLiteCommand(selectQuery, conn);
 
             using var reader = command.ExecuteReader();
@@ -155,7 +155,7 @@ namespace Leitura_Arquivos_Pedido.Data
                 var pedido = new Pedido
                 {
                     PedCod = reader.GetInt32(0),
-                    CliCod = reader.GetInt32(1),
+                    CNPJ = reader.GetString(1),
                     DataPedido = reader.GetDateTime(2).ToString()
                 };
                 pedidos.Add(pedido);
