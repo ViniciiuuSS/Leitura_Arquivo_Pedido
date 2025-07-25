@@ -1,17 +1,26 @@
-﻿using Leitura_Arquivos_Pedido.Model;
-using System.Data.Common;
+﻿using Leitura_Arquivos_Pedido.Dao;
+using Leitura_Arquivos_Pedido.Model;
 using System.Data.SQLite;
-using System.Transactions;
+using System.Reflection;
 
 namespace Leitura_Arquivos_Pedido.Data
 {
-    public static class DatabaseService
+    public class DatabaseService
     {
-        private static readonly string dbFile = "database.db";
+        private static PedidoDao objPedidoDao = new PedidoDao();
+        private static readonly string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static readonly string rootPath = Directory.GetParent(assemblyPath)?.Parent?.Parent?.Parent?.FullName; // Subir dois níveis
+        private static readonly string dbFolder = Path.Combine(rootPath ?? assemblyPath, "DataBase");
+        private static readonly string dbFile = Path.Combine(dbFolder, "database.db");
         private static readonly string connectionString = $"Data Source={dbFile};Version=3;";
 
         public static void Inicializar()
         {
+            if (!Directory.Exists(dbFolder))
+            {
+                Directory.CreateDirectory(dbFolder);
+            }
+
             if (!File.Exists(dbFile))
             {
                 SQLiteConnection.CreateFile(dbFile);
@@ -152,10 +161,11 @@ namespace Leitura_Arquivos_Pedido.Data
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
+                string cnpj = objPedidoDao.FormatarCnpj(reader.GetString(1));
                 var pedido = new Pedido
                 {
                     PedCod = reader.GetInt32(0),
-                    CNPJ = reader.GetString(1),
+                    CNPJ = cnpj,
                     DataPedido = reader.GetDateTime(2).ToString()
                 };
                 pedidos.Add(pedido);

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using API_Leitura_Arquivo.Model;
+using API_Leitura_Arquivo.Data;
 
 namespace API_Leitura_Arquivo.Controllers
 {
@@ -15,26 +16,25 @@ namespace API_Leitura_Arquivo.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            return StatusCode(200, "tidp");
+            List<Pedido_Produto> pedido = DatabaseService.ObterTodosPedidos(id);
+            return StatusCode(200, pedido);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePedido(int id, [FromBody] Pedido pedido)
+        public async Task<IActionResult> UpdatePedido(int id, [FromBody] List<Pedido_Produto> pedido)
         {
             try
             {
-                pedido.PedCod = id;
-                _logger.LogInformation("Requisição PUT recebida para atualizar o pedido ID: {Id}", id);
-
-                if (pedido == null || id != pedido.PedCod)
+                if (pedido == null)
                 {
                     _logger.LogWarning("Dados inválidos ou ID não corresponde ao corpo da requisição.");
                     return BadRequest("Dados inválidos ou ID não corresponde.");
                 }
 
+                DatabaseService.UpdatePedido(id, pedido);
 
                 _logger.LogInformation("Pedido ID {Id} atualizado com sucesso.", id);
                 return NoContent(); // Retorna 204 No Content para indicar sucesso
